@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conexiones para el Bienestar - Repositorio Socioemocional & IA - Grado 10.°</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0f3ff',
+              100: '#e1e7fe',
+              500: '#4f46e5',
+              600: '#4338ca',
+              700: '#3730a3',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .glass-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(229, 231, 235, 0.7);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 antialiased min-h-screen flex flex-col">
+
+  <!-- Banner con la Imagen Principal -->
+  <header class="bg-slate-900 text-white relative overflow-hidden border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      
+      <!-- Imagen Banner del Proyecto -->
+      <div class="relative w-full rounded-2xl overflow-hidden shadow-2xl mb-8 border border-slate-700/50">
+        <img src="Designer.png" alt="Conexiones para el Bienestar: Ingeniería, Gamificación y Mentalidad TIC" class="w-full h-auto object-cover max-h-[570px]">
+      </div>
+
+      <!-- Presentación e Introducción del Banner -->
+      <div class="text-center max-w-3xl mx-auto pb-4">
+        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/30 text-indigo-200 border border-indigo-400/30 mb-4">
+          <i class="fa-solid fa-brain"></i> Innovación Educativa + IA &nbsp;|&nbsp; Colegio Unión Europea
+        </span>
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white mb-3">
+          Repositorio de Proyectos <span class="text-indigo-300">Grado 10.°</span>
+        </h1>
+        <p class="text-sm sm:text-base text-slate-300 leading-relaxed mb-6">
+          Explora los proyectos dinámicos interactivos desarrollados por los estudiantes integrando ingeniería, gamificación, tecnología e inteligencia artificial para potenciar el bienestar y las habilidades socioemocionales.
+        </p>
+        
+        <!-- Métricas Rápidas -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 border-t border-slate-800 max-w-2xl mx-auto text-left sm:text-center">
+          <div>
+            <div class="text-2xl font-bold text-white" id="total-projects">16</div>
+            <div class="text-xs text-slate-400">Proyectos / Estudiantes</div>
+          </div>
+          <div>
+            <div class="text-2xl font-bold text-emerald-400" id="published-projects">5</div>
+            <div class="text-xs text-slate-400">Webs Publicadas</div>
+          </div>
+          <div class="col-span-2 sm:col-span-1">
+            <div class="text-2xl font-bold text-amber-300">100%</div>
+            <div class="text-xs text-slate-400">Creación con IA</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Filtros y Buscador -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20 w-full">
+    <div class="glass-card rounded-2xl shadow-xl p-4 sm:p-6 mb-8">
+      <div class="flex flex-col md:flex-row gap-4 justify-between items-center">
+        <!-- Buscador -->
+        <div class="relative w-full md:w-96">
+          <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+          <input type="text" id="search-input" placeholder="Buscar por estudiante o tema..." 
+                 class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white text-sm">
+        </div>
+
+        <!-- Filtros por Categoría -->
+        <div class="flex flex-wrap gap-2 w-full md:w-auto justify-start md:justify-end" id="filter-buttons">
+          <button data-category="todos" class="filter-btn active px-3.5 py-1.5 rounded-lg text-xs font-medium bg-indigo-600 text-white shadow-sm transition-all">
+            Todos (16)
+          </button>
+          <button data-category="publicados" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-medium bg-emerald-100 text-emerald-800 hover:bg-emerald-200 transition-all">
+            <i class="fa-solid fa-globe mr-1"></i> Publicados en Línea
+          </button>
+          <button data-category="emociones" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">
+            Gestión Emocional
+          </button>
+          <button data-category="convivencia" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">
+            Convivencia & Empatía
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grid de Proyectos -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 flex-grow w-full">
+    <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Se genera dinámicamente con JavaScript -->
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+      <p class="mb-2">Colegio Unión Europea &copy; 2026 - Muestra de Proyectos Socioemocionales e Inteligencia Artificial</p>
+      <p class="text-xs text-slate-500">Diseñado para la formación integral y el uso ético y reflexivo de la tecnología en Educación Secundaria.</p>
+    </div>
+  </footer>
+
+  <!-- Modal para detalles del proyecto -->
+  <div id="project-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 sm:p-8 relative">
+      <button id="close-modal" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-2 rounded-full hover:bg-slate-100 transition-all">
+        <i class="fa-solid fa-xmark text-xl"></i>
+      </button>
+      <div id="modal-content">
+        <!-- Contenido dinámico del modal -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Lista de Proyectos de Estudiantes de Grado 10°
+    const projects = [
+      {
+        id: 1,
+        student: "ARAGON GAMBA PAULA YISED",
+        title: "Manejo del Estrés Escolar",
+        category: "emociones",
+        description: "Estrategias interactivas y herramientas guiadas por IA para identificar, gestionar y reducir la ansiedad y el estrés académico en estudiantes de secundaria.",
+        url: null,
+        status: "En desarrollo",
+        tools: ["Prompting IA", "Planificación de Contenidos"],
+        badgeColor: "bg-slate-100 text-slate-600"
+      },
+      {
+        id: 2,
+        student: "CAMARGO RADA KEVIN SANTIAGO",
+        title: "Bullying y Ciberbullying",
+        category: "convivencia",
+        description: "Espacio digital orientado a la prevención del acoso escolar y cibernético, ofreciendo rutas de apoyo y concientización sobre el uso responsable de internet.",
+        url: null,
+        status: "En desarrollo",
+        tools: ["ChatGPT", "Casos de Estudio IA"],
+        badgeColor: "bg-slate-100 text-slate-600"
+      },
+      {
+        id: 3,
+        student: "CAMPOS SEPULVEDA NICOLAS",
+        title: "Autoestima: Descubriendo mi Valor",
+        category: "emociones",
+        description: "Plataforma de auto-reflexión con dinámicas interactivas para fortalecer la autovaloración, el amor propio y el reconocimiento de fortalezas individuales.",
+        url: null,
+        status: "En desarrollo",
+        tools: ["IA Generativa", "Rutas Pedagógicas"],
+        badgeColor: "bg-slate-100 text-slate-600"
+      },
+      {
+        id: 4,
+        student: "GONZALEZ MOSQUERA LAURA DAYANA",
+        title: "Semáforo Emocional",
+        category: "emociones",
+        description: "Aplicación interactiva y juego dinámico que ayuda a niños y jóvenes a reconocer su estado emocional actual y aplicar técnicas para autoregularse.",
+        url: "https://lauragonzakez90-cmyk.github.io/semaforo/#juego",
+        status: "Publicado",
+        tools: ["HTML5", "JavaScript", "Juego Interactivo"],
+        badgeColor: "bg-emerald-100 text-emerald-800"
+      },
+      {
+        id: 5,
+        student: "GONZALEZ TOLEDO ADRIANIS ESPERANZA",
+        title: "Bienestar Digital y Redes Sociales",
+        category: "convivencia",
+        description: "Guía interactiva sobre salud mental, balance de tiempo en pantalla y construcción de una identidad digital sana en redes sociales.",
+        url: "https://adrianisgonzalez7-sudo.github.io/bienestar/#salud",
+        status: "Publicado",
+        tools: ["GitHub Pages", "Análisis de Hábitos", "Diseño Web"],
+        badgeColor: "bg-emerald-100 text-emerald-800"
+      },
+      {
+        id: 6,
+        student: "GUTIERREZ LOPEZ MARIANNYS ANDREINA",
+        title: "Amistades Saludables",
+        category: "convivencia",
+        description: "Recurso web educativo para aprender a identificar relaciones de amistad constructivas, establecer límites respetuosos y promover la empatía.",
+        url: "https://mariannysgutierrezlopez2008-web.github.io/amistad1/",
+        status: "Publicado",
+        tools: ["Diseño Web IA", "Contenido Educativo"],
+        badgeColor: "bg-emerald-100 text-emerald-800"
+      },
+      {
+        id: 7,
+        student: "LEON RAMOS DIEGO SNEIDER",
+        title: "Empatía: Ponerse en los Zapatos del Otro",
+        category: "convivencia",
+        description: "Simulador de dilemas sociales e historias interactivas diseñadas para fomentar la comprensión del punto de vista de los demás.",
+        url:"https://diegoleonramoz10-jpg.github.io/Empat-a/",
+        status: "En desarrollo",
+        tools: ["Prompts Narrativos", "Lógica Web"],
+        badgeColor: "bg-slate-100 text-slate-600"
+      },
+      {
+        id: 8,
+        student: "LOZANO SANTOS LAURA PATRICIA",
+        title: "Conociendo mis Emociones",
+        category: "emociones",
+        description: "Diccionario y test de alfabetización emocional interactivo para nombrar, comprender y expresar de forma asertiva lo que sentimos.",
+        url: null,
+        status: "En desarrollo",
+        tools: ["IA Asistente", "Estructura Web"],
+        badgeColor: "bg-slate-100 text-slate-600"
+      },
+      {
+        id: 9,
+        student: "MORALES PATIÑO AYLYN JOHANA",
+        title: "Proyecto de Vida y mis Sueños",
+        category: "bienestar",
+        description: "Herramienta interactiva para la formulación de metas a corto, mediano y largo plazo, alineando aspiraciones personales con decisiones presentes.",
+        url: null,
+        status: "En desarrollo",
+        tools: ["Planificación IA", "Plantilla Web"],
+        badgeColor: "bg-slate-100 text-slate-600"
+      },
+      {
+        id: 10,
+        student: "MUÑOS DEVIA JUAN DAVID",
+        title: "Resiliencia: Levantarme Después de una Dificultad",
+        category: "emociones",
+        description: "Estrategias de afrontamiento frente al fracaso y los obstáculos cotidianos, promoviendo una mentalidad de aprendizaje y superación.",
+        url: null,
+        status: "En desarrollo",
+        tools: ["Contenido Guiado", "Generación de Código"],
+        badgeColor: "bg-slate-100 text-slate-600"
+      },
+      {
+        id: 11,
+        student: "PEREZ MEZA MIGUEL ANGEL",
+        title: "Frustración y Manejo del Enojo",
+        category: "emociones",
+        description: "Módulos prácticos para canalizar impulsos agresivos o momentos de ira a través de técnicas de regulación de emociones intensas.",
+        url: null,
+        status: "En desarrollo",
+        tools: ["Asistente IA", "Casos Prácticos"],
+        badgeColor: "bg-slate-100 text-slate-600"
+      },
+      {
+        id: 12,
+        student: "PEREZ TOBARIA MIGUEL ANGEL",
+        title: "Red de Apoyo: Pedir Ayuda También es Cuidarse",
+        category: "convivencia",
+        description: "Directorio interactivo e instructivo que fomenta la pérdida del estigma alrededor de la salud mental y la importancia de pedir ayuda a tiempo.",
+        url: null,
+        status: "En desarrollo",
+        tools: ["Diseño de Contenido", "Guías IA"],
+        badgeColor: "bg-slate-100 text-slate-600"
+      },
+      {
+        id: 13,
+        student: "QUINTERO GARCIA FERNEY DAVID",
+        title: "Resolución Pacífica de Conflictos",
+        category: "convivencia",
+        description: "Paso a paso para la mediación, la escucha activa y la negociación pacífica de desacuerdos en el aula de clases y el entorno familiar.",
+        url: null,
+        status: "En desarrollo",
+        tools: ["Simulaciones", "ChatGPT Code"],
+        badgeColor: "bg-slate-100 text-slate-600"
+      },
+      {
+        id: 14,
+        student: "QUITORA MADRIGAL DARWIN MAURICIO",
+        title: "El Poder de la Respiración y la Relajación",
+        category: "emociones",
+        description: "Ejercicios visuales y auditivos guiados para la pausa activa, la reducción de la tensión muscular y el mindfulness en la jornada escolar.",
+        url: null,
+        status: "En desarrollo",
+        tools: ["Animaciones CSS", "Guías de Relajación"],
+        badgeColor: "bg-slate-100 text-slate-600"
+      },
+      {
+        id: 15,
+        student: "RODRIGUEZ LOPEZ DANIEL FELIPE",
+        title: "Comunicación Asertiva",
+        category: "convivencia",
+        description: "Aplicación web que enseña a expresar opiniones, necesidades y sentimientos de manera clara y firme, sin caer en la pasividad ni la agresión.",
+        url: "https://rodriguezdaniel2685-sketch.github.io/comunicacion-/",
+        status: "Publicado",
+        tools: ["GitHub Pages", "Técnicas Asertivas", "Desarrollo Web"],
+        badgeColor: "bg-emerald-100 text-emerald-800"
+      },
+      {
+        id: 16,
+        student: "VELASQUEZ PRADA CAROL ESTEFANIA",
+        title: "Hábitos Saludables para una Mente Sana",
+        category: "bienestar",
+        description: "Sitio web interactivo enfocado en la relación entre alimentación consciente, descanso de calidad, actividad física y estabilidad emocional.",
+        url: "https://velasquezkarol08-spec.github.io/alimentacion-/",
+        status: "Publicado",
+        tools: ["Nutrición & Bienestar", "Desarrollo Web IA"],
+        badgeColor: "bg-emerald-100 text-emerald-800"
+      }
+    ];
+
+    // Renderizar tarjetas
+    function renderProjects(data) {
+      const grid = document.getElementById('projects-grid');
+      grid.innerHTML = '';
+
+      if(data.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full text-center py-12 text-slate-500">
+            <i class="fa-solid fa-folder-open text-4xl mb-3 block text-slate-300"></i>
+            No se encontraron proyectos que coincidan con la búsqueda.
+          </div>
+        `;
+        return;
+      }
+
+      data.forEach(p => {
+        const isPublished = p.url !== null;
+        const card = document.createElement('div');
+        card.className = "bg-white rounded-2xl shadow-sm border border-slate-200/80 hover:shadow-md transition-all p-5 flex flex-col justify-between";
+        
+        card.innerHTML = `
+          <div>
+            <!-- Encabezado Tarjeta -->
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="px-2.5 py-1 rounded-md text-xs font-semibold ${p.badgeColor}">
+                <i class="fa-solid ${isPublished ? 'fa-circle-check text-emerald-600' : 'fa-clock'} mr-1"></i>
+                ${p.status}
+              </span>
+              <span class="text-[11px] font-medium text-slate-400 uppercase tracking-wider">Grado 10.°</span>
+            </div>
+
+            <!-- Título y Estudiante -->
+            <h3 class="text-lg font-bold text-slate-900 leading-snug mb-1 hover:text-indigo-600 transition-colors">
+              ${p.title}
+            </h3>
+            <p class="text-xs font-semibold text-indigo-600 mb-3 flex items-center gap-1.5">
+              <i class="fa-solid fa-user-graduate"></i> ${p.student}
+            </p>
+            
+            <p class="text-slate-600 text-sm mb-4 leading-relaxed line-clamp-3">
+              ${p.description}
+            </p>
+          </div>
+
+          <div>
+            <!-- Herramientas IA -->
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              ${p.tools.map(t => `<span class="px-2 py-0.5 rounded text-[11px] bg-slate-100 text-slate-600 font-medium">${t}</span>`).join('')}
+            </div>
+
+            <!-- Botones de Acción -->
+            <div class="pt-3 border-t border-slate-100 flex items-center gap-2">
+              ${isPublished ? `
+                <a href="${p.url}" target="_blank" rel="noopener noreferrer" 
+                   class="flex-1 text-center py-2 px-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold transition-colors flex items-center justify-center gap-2">
+                  <span>Ver Proyecto</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+              ` : `
+                <button disabled class="flex-1 text-center py-2 px-3 rounded-xl bg-slate-100 text-slate-400 text-xs font-medium cursor-not-allowed">
+                  Prototipo en revisión
+                </button>
+              `}
+              <button onclick="openModal(${p.id})" class="p-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 text-xs transition-colors" title="Detalles del proyecto">
+                <i class="fa-solid fa-circle-info"></i>
+              </button>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Lógica del Modal
+    function openModal(id) {
+      const p = projects.find(item => item.id === id);
+      if(!p) return;
+
+      const modalContent = document.getElementById('modal-content');
+      modalContent.innerHTML = `
+        <div class="mb-4">
+          <span class="inline-block px-2.5 py-1 rounded-md text-xs font-semibold ${p.badgeColor} mb-2">
+            ${p.status}
+          </span>
+          <h2 class="text-2xl font-bold text-slate-900 mb-1">${p.title}</h2>
+          <p class="text-sm font-semibold text-indigo-600 flex items-center gap-2">
+            <i class="fa-solid fa-user-graduate"></i> Estudiante: ${p.student}
+          </p>
+        </div>
+
+        <div class="space-y-4 text-sm text-slate-600">
+          <div>
+            <h4 class="font-bold text-slate-800 mb-1">Descripción de la propuesta:</h4>
+            <p class="bg-slate-50 p-3 rounded-xl border border-slate-100 leading-relaxed">${p.description}</p>
+          </div>
+
+          <div>
+            <h4 class="font-bold text-slate-800 mb-1">Integración Tecnológica e IA:</h4>
+            <p>Este proyecto fue diseñado mediante un proceso de *prompting* asistido por IA para estructurar contenidos pedagógicos, lógica interactiva en HTML/JS y diseño centrado en el usuario.</p>
+          </div>
+
+          ${p.url ? `
+            <div class="pt-2">
+              <a href="${p.url}" target="_blank" class="inline-flex items-center gap-2 w-full justify-center py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm transition-colors">
+                <span>Abrir Aplicación Web en GitHub</span>
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+            </div>
+          ` : ''}
+        </div>
+      `;
+
+      document.getElementById('project-modal').classList.remove('hidden');
+    }
+
+    document.getElementById('close-modal').addEventListener('click', () => {
+      document.getElementById('project-modal').classList.add('hidden');
+    });
+
+    // Buscador y Filtros
+    let currentCategory = 'todos';
+
+    function filterData() {
+      const search = document.getElementById('search-input').value.toLowerCase();
+      
+      const filtered = projects.filter(p => {
+        const matchesSearch = p.student.toLowerCase().includes(search) || p.title.toLowerCase().includes(search);
+        
+        let matchesCategory = true;
+        if(currentCategory === 'publicados') {
+          matchesCategory = p.url !== null;
+        } else if(currentCategory !== 'todos') {
+          matchesCategory = p.category === currentCategory;
+        }
+
+        return matchesSearch && matchesCategory;
+      });
+
+      renderProjects(filtered);
+    }
+
+    document.getElementById('search-input').addEventListener('input', filterData);
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => {
+          b.classList.remove('bg-indigo-600', 'text-white');
+          b.classList.add('bg-slate-100', 'text-slate-700');
+        });
+        
+        btn.classList.remove('bg-slate-100', 'text-slate-700');
+        btn.classList.add('bg-indigo-600', 'text-white');
+
+        currentCategory = btn.getAttribute('data-category');
+        filterData();
+      });
+    });
+
+    // Inicializar
+    renderProjects(projects);
+  </script>
+</body>
+</html>
